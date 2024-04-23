@@ -1,6 +1,6 @@
 Brick = Class{}
 
-function Brick:init(xAxis, yAxis):
+function Brick:init(xAxis, yAxis)
     self.tier = 0
     self.color = 1
 
