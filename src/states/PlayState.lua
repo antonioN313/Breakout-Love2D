@@ -52,6 +52,21 @@ function PlayState:update(dt)
 
             brick:hit()
 
+            if self.ball.x + 2 < brick.x and self.ball.dx > 0 then
+                self.ball.dx = -self.ball.dx
+                self.ball.x = brick.x - self.ball.width
+            elseif self.ball.x + 6 > brick.x and self.ball.dx < 0 then
+                self.ball.dx = -self.ball.dx
+                self.ball.x = brick.x + brick.width
+            elseif self.ball.y < brick.y then
+                self.ball.dy = -self.ball.dy
+                self.ball.y = brick.y - self.ball.height
+            else
+                self.ball.dy = -self.ball.dy
+                self.ball.y = brick.y + brick.height
+            end
+            self.ball.dy = self.ball.dy * 1.1
+            break
         end
     end
 
