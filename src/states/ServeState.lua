@@ -47,3 +47,4 @@ function ServeState:render()
 
     love.graphics.setFont(gFonts['medium'])
     love.graphics.printf('Press Enter to serve!', 0, VIRTUAL_HEIGHT / 2, VIRTUAL_WIDTH, 'center')
+end
