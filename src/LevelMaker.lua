@@ -14,7 +14,7 @@ LevelMaker = Class{}
 function LevelMaker.createMap(level)
     local bricks = {}
     local numRows = math.random(1, 5)
-    local numCols = math.random(7, 15)
+    local numCols = math.random(7, 13)
     numCols = numCols % 2 == 0 and (numCols + 1) or numCols
 
     local highestTier = math.min(3, math.floor(level / 5))
