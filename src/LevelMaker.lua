@@ -40,15 +40,16 @@ function LevelMaker.createMap(level)
         local solidColor = math.random(1, highestColor)
         local solidTier = math.random(0, highestTier)
 
-        if skipPattern and skipFlag then
-            skipFlag = not skipFlag
-
-            goto continue
-        else
-            skipFlag = not skipFlag
-        end
-
         for xAxis = 1, numCols do
+            
+            if skipPattern and skipFlag then
+                skipFlag = not skipFlag
+    
+                goto continue
+            else
+                skipFlag = not skipFlag
+            end
+            
             brick = Brick((xAxis-1) * 32 + 8 + (13 - numCols) * 16, yAxis * 16) 
             
             if alternatePattern and alternateFlag then

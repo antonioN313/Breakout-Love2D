@@ -52,18 +52,18 @@ function PlayState:update(dt)
 
             if self.ball.x + 2 < brick.x and self.ball.dx > 0 then
                 self.ball.dx = -self.ball.dx
-                self.ball.x = brick.x - self.ball.width
+                self.ball.x = brick.x - 8
             elseif self.ball.x + 6 > brick.x and self.ball.dx < 0 then
                 self.ball.dx = -self.ball.dx
-                self.ball.x = brick.x + brick.width
+                self.ball.x = brick.x + 32
             elseif self.ball.y < brick.y then
                 self.ball.dy = -self.ball.dy
-                self.ball.y = brick.y - self.ball.height
+                self.ball.y = brick.y - 8
             else
                 self.ball.dy = -self.ball.dy
-                self.ball.y = brick.y + brick.height
+                self.ball.y = brick.y + 16
             end
-            self.ball.dy = self.ball.dy * 1.1
+            self.ball.dy = self.ball.dy * 1.02
             break
         end
     end
