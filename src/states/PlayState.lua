@@ -101,7 +101,7 @@ function PlayState:render()
         brick:render()
     end
 
-    for k, Brick in pairs(self.bricks) do
+    for k, brick in pairs(self.bricks) do
         brick:renderParticles()
     end
 
