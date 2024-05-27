@@ -43,7 +43,9 @@ function love.load()
         ['balls'] = GenerateQuadsBalls(gTextures['main']),
         ['bricks'] = GenerateQuadsBricks(gTextures['main']),
         ['hearts'] = GenerateQuads(gTextures['hearts'], 10, 9),
-        ['arrows'] = GenerateQuads(gTextures['arrows'], 24, 24)
+        ['arrows'] = GenerateQuads(gTextures['arrows'], 24, 24),
+        ['powerup'] = GeneratePowerUp(gTextures['main']),
+        ['keybrick'] = GenerateKeyBrick(gTextures['main'])
     }
 
     love.graphics.setFont(gFonts['small'])
@@ -69,6 +71,9 @@ function love.load()
     })
 
     love.keyboard.keysPressed = {}
+
+    gSounds['music']:play()
+    gSounds['music']:setLooping(true)
 end
 
 function love.resize(w, h)

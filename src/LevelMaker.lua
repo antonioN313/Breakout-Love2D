@@ -8,7 +8,7 @@ SOLID = 1           -- all colors the same in this row
 ALTERNATE = 2       -- alternate colors
 SKIP = 3            -- skip every other block
 NONE = 4            -- no blocks this row
-
+local once = true
 LevelMaker = Class{}
 
 function LevelMaker.createMap(level)
@@ -40,6 +40,8 @@ function LevelMaker.createMap(level)
         local solidColor = math.random(1, highestColor)
         local solidTier = math.random(0, highestTier)
 
+        local keyBrick = math.random(5) == 1 and true or false
+
         for xAxis = 1, numCols do
             
             if skipPattern and skipFlag then
@@ -66,6 +68,14 @@ function LevelMaker.createMap(level)
                 brick.color = solidColor
                 brick.tier = solidTier
             end
+
+            if keyBrick and once then
+                brick.color = 6
+                brick.tier = 1
+                brick.solidPlay = false
+                brick.keyPlay = true
+                once = false
+              end
 
             table.insert(bricks, brick)
 
