@@ -30,6 +30,6 @@ function Powerup:collides(target)
 end
 
 function Powerup:render()
-  love.graphics.draw(gTextures['main'], gFrames['powerups'][(self.skin + 8)],
+  love.graphics.draw(gTextures['main'], gFrames['powerup'][(self.skin + 8)],
       self.x, self.y)
 end

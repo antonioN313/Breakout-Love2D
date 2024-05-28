@@ -25,6 +25,11 @@ paletteColors = {
         ['r'] = 251,
         ['g'] = 242,
         ['b'] = 54
+    },
+    [6] = {
+        ['r'] = 255,
+        ['g'] = 240,
+        ['b'] = 60
     }
 }
 
@@ -39,6 +44,8 @@ function Brick:init(xAxis, yAxis)
     self.height = 16
 
     self.inPlay = true
+    self.keyPlay = false
+    self.solidPlay = true
     self.psystem = love.graphics.newParticleSystem(gTextures['particle'], 64)
     self.psystem:setParticleLifetime(0.5,1)
     self.psystem:setLinearAcceleration(-15, 0, 15, 80)
@@ -63,21 +70,34 @@ function Brick:hit()
     gSounds['brick-hit-2']:stop()
     gSounds['brick-hit-2']:play()
 
-    if self.tier > 0 then
-        if self.color == 1 then
-            self.tier = self.tier - 1
-            self.color = 5
+    if self.solidPlay then
+        if self.tier > 0 then
+            if self.color == 1 then
+                self.tier = self.tier - 1
+                self.color = 5
+            else
+                self.color = self.color - 1
+            end
         else
-            self.color = self.color - 1
-        end
-    else
-        -- if we're in the first tier and the base color, remove brick from play
-        if self.color == 1 then
-            self.inPlay = false
-        else
-            self.color = self.color - 1
+            -- if we're in the first tier and the base color, remove brick from play
+            if self.color == 1 then
+                self.inPlay = false
+            else
+                self.color = self.color - 1
+            end
         end
     end
+
+    if self.keyPlay then
+        if self.tier > 0 then
+          self.tier = self.tier - 1
+          self.color = self.color - 6
+        end
+        if self.color == 0 then
+          self.inPlay = false
+          self.keyPlay = false
+        end
+      end
 
     if not self.inPlay then
         gSounds['brick-hit-1']:stop()
@@ -95,6 +115,9 @@ function Brick:render()
             gFrames['bricks'][1 + ((self.color - 1) * 4) + self.tier],
             self.x, self.y)
     end
+    if self.keyPlay and self.color == 6 then
+        love.graphics.draw(gTextures['main'], gFrames['keybrick'][1], self.x, self.y)
+      end
 end
 
 function Brick:renderParticles()
