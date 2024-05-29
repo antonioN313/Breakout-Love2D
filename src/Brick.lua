@@ -81,6 +81,7 @@ function Brick:hit()
         else
             -- if we're in the first tier and the base color, remove brick from play
             if self.color == 1 then
+                self.solidPlay = false
                 self.inPlay = false
             else
                 self.color = self.color - 1
@@ -111,13 +112,15 @@ end
 
 function Brick:render()
     if self.inPlay then
-        love.graphics.draw(gTextures['main'], 
+        if self.solidPlay then
+            love.graphics.draw(gTextures['main'], 
             gFrames['bricks'][1 + ((self.color - 1) * 4) + self.tier],
             self.x, self.y)
+        end
+        if self.keyPlay and self.color == 6 then
+            love.graphics.draw(gTextures['main'], gFrames['keybrick'][1], self.x, self.y)
+        end
     end
-    if self.keyPlay and self.color == 6 then
-        love.graphics.draw(gTextures['main'], gFrames['keybrick'][1], self.x, self.y)
-      end
 end
 
 function Brick:renderParticles()
